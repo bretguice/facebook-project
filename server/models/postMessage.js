@@ -1,10 +1,13 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const postSchema = mongoose.Schema({
+var Schema = mongoose.Schema;
+
+const postSchema = new Schema({
     message: String,
     name: String,
     creator: { type: Schema.Types.ObjectId, ref: 'User'},
     selectedImg: String,
+    tags: [String],
     likes: {
         type: [String],
         default: [],

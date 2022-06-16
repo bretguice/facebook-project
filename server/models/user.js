@@ -1,8 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const userSchema = mongoose.Schema({
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+var Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+    name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
     profilePicture: { type: String },
