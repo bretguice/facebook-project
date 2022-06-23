@@ -1,17 +1,17 @@
 import { DELETE, UPDATE, FETCH_ALL, CREATE } from "../constants/actionTypes";
 
-const postReducer = (posts = [], action) => {
+const postReducer = (state= {posts: [{message:'test'}], users: []}, action) => {
     switch (action.type){
         case DELETE:
-            return posts.filter((post) => post._id !== action.payload);
+            return {...state, posts: state.posts.filter((post) => post._id !== action.payload)};
         case UPDATE:
-            return posts.map((post) =>post._id ===action.payload ? action.payload : post );
+            return {...state, posts: state.posts.map((post) =>post._id ===action.payload ? action.payload : post )};
         case FETCH_ALL:
-            return action.payload;
+            return {...state, posts: action.payload.data};
         case CREATE:
-            return [ ...posts, action.payload];
+            return {...state, posts: [ ...state.posts, action.payload]};
         default:
-            return posts;
+            return state;
     }
 }
 

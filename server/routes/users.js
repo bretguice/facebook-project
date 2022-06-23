@@ -1,10 +1,10 @@
 import express from 'express';
-
-import { signin, signup } from '../controllers/users.js';
+import { getUser, updateUser } from '../controllers/users.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/signin', signin);
-router.post('/signup', signup);
+router.get('/:id', getUser);
+router.patch('/:id', auth, updateUser);
 
 export default router;

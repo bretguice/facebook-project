@@ -9,7 +9,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { AUTH } from '../../constants/actionTypes';
 import Input from './Input';
 import Icon from './Icon';
-import { signin, signup } from '../../actions/auth'
+// import { signin, signup } from '../../features/asyncThunk';
+import { signin, signup } from '../../actions/auth';
 
 const Auth = () => {
     const [ isSignup, setIsSignup ] = useState(false)
@@ -33,31 +34,31 @@ const Auth = () => {
         } else {
             dispatch(signin(formData, history));
         }
-
     };
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
 
     };
 
-    const googleSuccess = async (res) => {
-        const result = jwt_decode(res.credential)
-        const token = result.jti;
+    // const googleSuccess = async (res) => {
+    //     const result = jwt_decode(res.credential)
+    //     const token = result.jti;
         
-        try{
-            dispatch({ type: AUTH, data: { result, token }});
-            history('/');
-        } catch (error) {
-            console.log(error);
-        } 
+    //     try{
+    //         dispatch({ type: AUTH, data: { result, token }});
+    //         history('/');
+    //     } catch (error) {
+    //         console.log(error);
+    //     } 
         
-    }
+    // }
 
-    const googleFailure = (err) => {
-        console.log(err);
-        console.log('Google Sign In was unsucessful. Try again later.')
-    }
+    // const googleFailure = (err) => {
+    //     console.log(err);
+    //     console.log('Google Sign In was unsucessful. Try again later.')
+    // }
 
   return (
     <Container component='main' maxWidth='xs' >
@@ -81,7 +82,7 @@ const Auth = () => {
                 <Button type='submit' fullWidth variant='contained' color='primary' className={'submit'}>
                     { isSignup ? 'Sign Up' : 'Sign In'}
                 </Button>
-                <GoogleLogin  
+                {/* <GoogleLogin  
                     clientId='636139791510-22pas2t4lphqs4ue4pd6icuade3pqt5r.apps.googleusercontent.com'
                     width='100'
                     render={(renderProps) => (
@@ -92,7 +93,7 @@ const Auth = () => {
                     onSuccess={googleSuccess}
                     onFailure={googleFailure}
                     cookiePolicy='single_host_origin'
-                />
+                /> */}
                 <Box container justifyContent='center'>
                     
                         <Button variant='solid' color='green' onClick={switchMode}>

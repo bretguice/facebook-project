@@ -4,7 +4,7 @@ import { Home, Article, Group, Storefront, Person, Settings, AccountBox, ModeNig
 const LeftBar = () => {
   return (
     <Box 
-    flex={2} 
+    flex={1} 
     p={2} 
     sx={{ display: { xs: 'none', sm: 'block'}}}>
         <Box position='fixed'>
