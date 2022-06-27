@@ -7,7 +7,7 @@ import Form from '../Form/Form';
 
 const Posts = ({ currentId, setCurrentId }) => {
     const posts = useSelector((state) => state.posts.posts);
-    
+    console.log(currentId)
     const dispatch = useDispatch();
     
     useEffect(() =>{

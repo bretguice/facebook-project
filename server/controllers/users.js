@@ -16,10 +16,9 @@ export const getUsers =  async (req,res) => {
 
 export const getUser =  async (req,res) => {
     const userId = req.params.id;
-    
     try{
         const users = await User.findById(userId);
-        console.log('get user for post')
+
         res.status(200).json(users);
     } catch (error) {
         res.status(404).json({ message: error.message });

@@ -8,13 +8,14 @@ import Navbar from '../Navbar/Navbar';
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(0);
+    const [ currentUser, setCurrentUser ] = useState(JSON.parse(localStorage.getItem('user'))); 
 
   return (
     <Box >
-        <Navbar  />
+        <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}  />
         <Stack direction='row'spacing={2} justifyContent='space-between' >
             <LeftBar />
-            <Posts setCurrentId={setCurrentId} currentId={currentId} />
+            <Posts currentUser={currentUser}  />
             <RightBar />
         </Stack>
     </Box>

@@ -8,11 +8,11 @@ import MenuItem from '@mui/material/MenuItem';
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { StyledToolbar, StyledBox, Search, Icons, UserBox } from './styles';
 
-const Navbar = () => {
-  const [ currentUser, setCurrentUser ] = useState(JSON.parse(localStorage.getItem('profile'))); 
+const Navbar = ( {currentUser, setCurrentUser} ) => {
+
   const [ open, setOpen ] = useState(false);
   const navigate = useNavigate();
-
+  
     const logout = () => {
         localStorage.clear();
         navigate('/auth');
@@ -20,15 +20,18 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-      console.log('use effect Navbar')
-        const token = currentUser?.token;
+      const token = currentUser?.token;
+      console.log(token)
 
         if (token) {
             const decodedToken = decode(token);
+            console.log(decodedToken.exp)
+            const date = new Date().getTime()
+            console.log(date)
             if (decodedToken.exp * 1000 < new Date().getTime( )) logout();
         }
 
-        setCurrentUser(JSON.parse(localStorage.getItem('profile')));
+        setCurrentUser(JSON.parse(localStorage.getItem('user')));
 
     }, [])
   
@@ -55,7 +58,7 @@ const Navbar = () => {
             </Icons>
             <UserBox onClick={(e) => setOpen(true)}>
               <UserAvatar sx={{ width: 30, height:30 }} user={currentUser} ></UserAvatar>
-                <Typography variant='span'>{currentUser.result.firstName} </Typography>
+                <Typography variant='span'>{currentUser.firstName} </Typography>
             </UserBox>
         </StyledToolbar>
         <Menu
@@ -72,7 +75,9 @@ const Navbar = () => {
           horizontal: 'right',
         }}
       >
-        <MenuItem >Profile</MenuItem>
+        <Link to={`/user/${currentUser.id}`} >
+          <MenuItem >Profile</MenuItem>
+        </Link>
         <MenuItem >My account</MenuItem>
         <MenuItem onClick={() => logout()}>Logout</MenuItem>
       </Menu>

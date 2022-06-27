@@ -6,6 +6,7 @@ import {  GoogleOAuthProvider } from '@react-oauth/google';
 
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
+import Profile from './components/Profile/Profile';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
             <Routes>
                 <Route path='/' exact element={ <Home /> } /> 
                 <Route path='/auth' exact element={ <Auth />} />
+                <Route path='/user/:id' element={ <Profile />} />
             </Routes>   
             </GoogleOAuthProvider> 
         </Box>
