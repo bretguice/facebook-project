@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import mongoose from "mongoose";
 import User from "../models/user.js";
+import { body } from 'express-validator'
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
@@ -25,10 +25,15 @@ export const signin = async (req, res) => {
 }
 
 export const signup = async (req, res) => {
+    body('email').normalizeEmail();
+    body('firstName').trim().escape();
+    body('lastName').trim().escape();
+    body('password').trim();
+    body('confirmPassword').trim();
     const { email, password, confirmPassword, firstName, lastName } = req.body;
-
     try {
         const oldUser = await User.findOne({ email });
+
         if(oldUser) return res.status(400).json({ message: "User already exists." });
 
         if(password !== confirmPassword) return res.status(400).json({ message: "Passwords don't match." });

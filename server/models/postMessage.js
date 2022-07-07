@@ -3,11 +3,10 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    message: String,
-    name: String,
+    message: {type: String },
+    name: { type: String },
     creator: { type: Schema.Types.ObjectId, ref: 'User'},
     selectedImg: [String],
-    tags: [String],
     likes: {
         type: [String],
         default: [],

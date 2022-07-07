@@ -5,63 +5,65 @@ import { getPosts, createPost, updatePost, deletePost, likePost } from './asyncT
 const postSlice = createSlice({
     name: 'posts',
     initialState: {
-        posts: [],
-        fetchingPosts: false,
+        postList: [],
+        loading: false,
         fetchingError: null,
     },
     reducers: {},
     extraReducers: {
         [getPosts.pending]: (state, action) => {
-            state.fetchingPosts = true;
+            state.loading = true;
         },
         [getPosts.fulfilled]: (state, action) => {
-            state.posts = action.payload;
+            state.postList = action.payload;
             state.fetchingError = null;
-            state.fetchingPosts = false;
+            state.loading = false;
         },
         [getPosts.rejected]: (state, action) => {
             state.fetchingError = action.error;
         }, 
         [createPost.pending]: (state, action) => {
-            state.fetchingPosts = true;
+            state.loading = true;
         },
         [createPost.fulfilled]: (state, action) => {
-            state.posts.push(action.payload);
+            state.postList.push(action.payload);
             state.fetchingError = null;
-            state.fetchingPosts = false;
+            state.loading = false;
         },
         [createPost.rejected]: (state, action) => {
             state.fetchingError = action.error;
         }, 
         [updatePost.pending]: (state, action) => {
-            state.fetchingPosts = true;
+            state.loading = true;
         },
         [updatePost.fulfilled]: (state, action) => {
-            state.posts = action.payload;
+            const i = state.postList.findIndex((post) => post._id === action.payload._id);
+            state.postList[i] = action.payload;
             state.fetchingError = null;
-            state.fetchingPosts = false;
+            state.loading = false;
         },
         [updatePost.rejected]: (state, action) => {
             state.fetchingError = action.error;
         }, 
         [likePost.pending]: (state, action) => {
-            state.fetchingPosts = true;
+            state.loading = true;
         },
         [likePost.fulfilled]: (state, action) => {
-            state.posts.filter((post) => post._id === action.payload._id).likes.push(action.payload);
+            const i = state.postList.findIndex((post) => post._id === action.payload._id);
+            state.postList[i] = action.payload;
             state.fetchingError = null;
-            state.fetchingPosts = false;
+            state.loading = false;
         },
         [likePost.rejected]: (state, action) => {
             state.fetchingError = action.error;
         }, 
         [deletePost.pending]: (state, action) => {
-            state.fetchingPosts = true;
+            state.loading = true;
         },
         [deletePost.fulfilled]: (state, action) => {
-            state.posts = action.payload;
+            state.postList = action.payload;
             state.fetchingError = null;
-            state.fetchingPosts = false;
+            state.loading = false;
         },
         [deletePost.rejected]: (state, action) => {
             state.fetchingError = action.error;

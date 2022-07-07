@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
 import { Avatar, Box, Button, Paper, Grid, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
 import Input from './Input';
-import { signin, signup } from '../../features/asyncThunk';
+import { signin, signup, getPosts, getUsers } from '../../features/asyncThunk';
+import Loading from '../../components/Loading/Loading';
 
 const Auth = () => {
-    const [ isSignup, setIsSignup ] = useState(false)
+    const [ isSignup, setIsSignup ] = useState(false);
     const [ showPassword, setShowPassword ] = useState(false);
-    const [ formData, setFormData ] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' })
+    const [ formData, setFormData ] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '' });
+    const authLoading = useSelector((state) => state.auth.loading);
+    const postLoading = useSelector((state) => state.posts.loading);
+    const userLoading = useSelector((state) => state.users.loading);
+    const loading = (authLoading || postLoading || userLoading); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -29,10 +33,13 @@ const Auth = () => {
         e.preventDefault(); 
         if (isSignup){
             dispatch(signup(formData)).unwrap()
-            .then(() => navigate('/'));
-            
+            .then(() => dispatch(getPosts()))
+            .then(() => dispatch(getUsers()))
+            .then(() => navigate('/'));        
         } else {
             dispatch(signin(formData)).unwrap()
+            .then(() => dispatch(getPosts()))
+            .then(() => dispatch(getUsers()))
             .then(() => navigate('/'));
         }
     };
@@ -66,6 +73,9 @@ const Auth = () => {
                 </Box>
             </form>
         </Paper>
+
+                    <Loading loading={loading} />
+                   
     </Container>
   )
 }

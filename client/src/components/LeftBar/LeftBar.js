@@ -1,81 +1,63 @@
 import React from 'react';
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material';
-import { Home, Article, Group, Storefront, Person, Settings, AccountBox, ModeNight } from '@mui/icons-material';
-const LeftBar = () => {
+import { Link } from 'react-router-dom';
+import { Box, List, ListItem, ListItemText, ListItemIcon, Stack } from '@mui/material';
+import { Home, Person, AccountBox, PersonAdd } from '@mui/icons-material';
+
+const LeftBar = ({currentUser}) => {
+
   return (
-    <Box 
-    flex={1} 
-    p={2} 
-    sx={{ display: { xs: 'none', sm: 'block'}}}>
-        <Box position='fixed'>
+    <Stack>
+      <Box 
+      bgcolor={'lightgray'}
+      p={1}
+      width={'15vw'}
+      sx={{ display: { xs: 'none', sm: 'flex'}}}
+      flex={1} 
+      >
        <List>
           <ListItem disablePadding>
-            <ListItemButton component='a' href='#'>
+              <Link to={'/'}>
+              <Stack direction='row'>
               <ListItemIcon>
-                <Home />
+                  <Home />
               </ListItemIcon>
-              <ListItemText primary="Homepage" />
-            </ListItemButton>
+              <ListItemText primary="Home" />
+              </Stack>
+              </Link>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+              <Link to={`/user/${currentUser._id}`}>
+              <Stack direction='row'>
               <ListItemIcon>
-                <Article />
+                  <AccountBox />
               </ListItemIcon>
-              <ListItemText primary="Pages" />
-            </ListItemButton>
+              <ListItemText primary="Profile" />
+              </Stack>
+              </Link>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Group />
-              </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <Storefront />
-              </ListItemIcon>
-              <ListItemText primary="Marketplace" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+              <Link to={'/friends'}>
+              <Stack direction='row'>
               <ListItemIcon>
                 <Person />
               </ListItemIcon>
               <ListItemText primary="Friends" />
-            </ListItemButton>
+              </Stack>
+              </Link>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <Link to={'/friendrequest'}>
+            <Stack direction='row'>
               <ListItemIcon>
-                <Settings />
+                <PersonAdd />
               </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <AccountBox />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch /*onChange={e=>setMode(mode === "light" ? "dark" : "light")}*//>
-            </ListItemButton>
+              <ListItemText primary="Friend Requests" />
+              </Stack>
+              </Link>
           </ListItem>
         </List>
         </Box>
-    </Box>
+          </Stack>
   )
 }
 

@@ -9,8 +9,8 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     profilePicture: { type: String },
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    friendRequest: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     posts: [{ type: Schema.Types.ObjectId, ref: 'PostMessage'}],
-    id: { type: String },
 })
 
 const User = mongoose.model('User', userSchema);

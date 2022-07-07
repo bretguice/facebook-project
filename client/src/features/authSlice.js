@@ -3,7 +3,7 @@ import { signin, signup } from "./asyncThunk";
 
     
 const authSlice = createSlice({
-    name: 'users',
+    name: 'auth',
     initialState: {
         authData: null,
         loading: false,
@@ -21,8 +21,8 @@ const authSlice = createSlice({
         },
         [signin.fulfilled]: (state, action) => {
             state.authData = action.payload;
-            state.loading = false;
             state.message = null;
+            state.loading = false;
         },
         [signup.pending]: (state, action) => {
             state.loading = true;

@@ -1,31 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Grid} from '@mui/material';
 import Post from './Post/Post';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPosts, getUsers } from '../../features/asyncThunk';
+import { useSelector } from 'react-redux';
 import Form from '../Form/Form';
 
-const Posts = ({ currentId, setCurrentId }) => {
-    const posts = useSelector((state) => state.posts.posts);
-    console.log(currentId)
-    const dispatch = useDispatch();
-    
-    useEffect(() =>{
-        dispatch(getPosts())
-        dispatch(getUsers())
-    },[dispatch])
+const Posts = () => {
+    const postList = useSelector((state) => state.posts.postList);
 
     return (
         <Box 
         flex={4} 
         p={2} 
         className='container' container  alignItems='stretch' spacing={3}>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
-                {posts.map((post) => (
+            <Form />
+            {(postList) ? 
+            postList.slice(0).reverse().map((post) => (
                     <Grid key={post._id} item xs={12} sm={6} >
-                        <Post post={post} setCurrentId={setCurrentId} />
+                        <Post post={post} />
                     </Grid>
-                ))}
+                )) : null }
             </Box>
     )
 }
