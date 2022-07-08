@@ -11,6 +11,8 @@ import FriendRequests from './Pages/Friend Requests/FriendRequests';
 
 const App = () => {
 
+
+    
     return(
         <BrowserRouter>
         <Box>
