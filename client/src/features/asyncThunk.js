@@ -91,7 +91,7 @@ export const signin = createAsyncThunk('auth/signin', async (formData, thunkAPI)
     return response.data;
 })
 
-export const signup = createAsyncThunk('auth/signup', async (formData, thunkAPI) => {
+export const signup = createAsyncThunk('/auth/signup', async (formData, thunkAPI) => {
     const response = await api.post('/auth/signup', formData);
     if (response.status === 201 ){
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -99,5 +99,15 @@ export const signup = createAsyncThunk('auth/signup', async (formData, thunkAPI)
         return thunkAPI.rejectWithValue(response)
         }
         return response.data;
+})
+
+export const testDrive = createAsyncThunk('/auth/test', async (email, thunkAPI) => {
+    const response = await api.post('/auth/test', email );
+    if (response.status === 200 ){
+    localStorage.setItem('user', JSON.stringify(response.data));
+    } else {
+    return thunkAPI.rejectWithValue(response)
+    }
+    return response.data;
 })
 

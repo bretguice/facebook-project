@@ -25,7 +25,7 @@ app.use('/user', userRouter);
 app.use('/auth', authRouter);
 
 app.get('/', (req, res) =>{
-    res.send('Hello memories API')
+    res.send('Hello odinbook API')
 });
 
 const PORT = process.env.PORT || 5000;

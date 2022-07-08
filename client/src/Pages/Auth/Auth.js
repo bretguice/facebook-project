@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import { Avatar, Box, Button, Paper, Grid, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Input from './Input';
-import { signin, signup, getPosts, getUsers } from '../../features/asyncThunk';
+import { signin, signup, testDrive, getPosts, getUsers } from '../../features/asyncThunk';
 import Loading from '../../components/Loading/Loading';
 
 const Auth = () => {
@@ -28,6 +28,13 @@ const Auth = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     };
+
+    const handleTestDrive = () => {
+        dispatch(testDrive({email: 'test@test.com'})).unwrap()
+            .then(() => dispatch(getPosts()))
+            .then(() => dispatch(getUsers()))
+            .then(() => navigate('/'));
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -66,6 +73,10 @@ const Auth = () => {
                 <Button type='submit' fullWidth variant='contained' color='primary' className={'submit'}>
                     { isSignup ? 'Sign Up' : 'Sign In'}
                 </Button>
+                <br></br>
+                {/* <Button variant='contained' fullWidth color='secondary' onClick={handleTestDrive}>
+                    Test Drive
+                </Button> */}
                 <Box container justifyContent='center'>                  
                     <Button variant='solid' color='green' onClick={switchMode}>
                         { isSignup ? 'Already have an account? Sign In' : "Create New Account" }

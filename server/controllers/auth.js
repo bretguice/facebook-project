@@ -50,3 +50,15 @@ export const signup = async (req, res) => {
         res.status(500).json({ message: "Something went wrong." });
     }
 }
+
+export const testDrive = async (req, res) => {
+
+    try {
+        const testUser = await User.findone({ email: process.env.TEST_EMAIL });
+        const token = jwt.sign({ email: testUser.email, id: testUser._id}, process.env.SECRET, { expiresIn: '10h' });
+        res.status(200).json({ result: testUser, token });
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
+    }
+
+}

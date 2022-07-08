@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin, signup } from "./asyncThunk";
+import { signin, signup, testDrive } from "./asyncThunk";
 
     
 const authSlice = createSlice({
@@ -36,6 +36,19 @@ const authSlice = createSlice({
             state.authData = action.payload;
             state.loading = false;
             state.message = null;
+        },
+        [testDrive.pending]: (state, action) => {
+            state.loading = true;
+            state.message = null;
+        },
+        [testDrive.rejected]: (state, action) => {
+            state.loading = false;
+            state.message = action.error
+        },
+        [testDrive.fulfilled]: (state, action) => {
+            state.authData = action.payload;
+            state.message = null;
+            state.loading = false;
         },
     }
 })

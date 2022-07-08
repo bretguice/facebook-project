@@ -63,7 +63,6 @@ const Profile = () => {
                     <Typography variant='h6'>Edit Profile Information</Typography>
                     <TextField variant='outlined' name='firstName' onChange={(e) => handleChange(e)} value={userData.firstName} ></TextField>
                     <TextField name='lastName' onChange={(e) => handleChange(e)} value={userData.lastName} ></TextField>
-                    <TextField name='email' onChange={(e) => handleChange(e)} value={userData.email} ></TextField>
                     <div className='fileInput'>
                         <FileBase type='file' multiple={false} onDone={({base64}) => setUserData(userData =>({ ...userData, profilePicture: base64}))}/>
                     </div>
