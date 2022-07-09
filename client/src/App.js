@@ -8,13 +8,13 @@ import Profile from './Pages/Profile/Profile';
 import Friends from './Pages/Friends/Friends';
 import FriendRequests from './Pages/Friend Requests/FriendRequests';
 import { useSelector } from 'react-redux';
-import { selectToken } from './features/selectors';
+import { selectAuth, selectToken } from './features/selectors';
 import decode from 'jwt-decode';
 
 const App = () => {
     const [isLogged, setIsLogged] = useState(false);
+    const authUser = useSelector(selectAuth);
     const token = useSelector(selectToken);
-
 
     useEffect(() => {
  
@@ -26,6 +26,8 @@ const App = () => {
             } else {
                 setIsLogged(true);
             }
+        } else {
+            setIsLogged(false);
         }
 
     }, [setIsLogged, token])
