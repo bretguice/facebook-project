@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate,  Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import decode from 'jwt-decode';
 import { AppBar, Box, Badge, InputBase, Typography, Menu, MenuItem } from '@mui/material';
 import { Mail, Notifications } from '@mui/icons-material';
 import UserAvatar from "../UserAvatar/UserAvatar";
-import { selectAuth, selectToken } from '../../features/selectors';
+import { selectAuth } from '../../features/selectors';
 import { StyledToolbar, StyledBox, Search, Icons, UserBox } from './styles';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 
@@ -14,7 +13,6 @@ const Navbar = () => {
   const [ open, setOpen ] = useState(false);
   const authUser = useSelector(selectAuth);
   const currentUser = useSelector((state) => state.users.userList.find((u) => u._id === authUser._id));
-  const token = useSelector(selectToken);
 
   const navigate = useNavigate();
   
@@ -22,15 +20,6 @@ const Navbar = () => {
         localStorage.clear();
         navigate('/auth');
     };
-
-    useEffect(() => {
- 
-        if (token) {
-            const decodedToken = decode(token);
-            if (decodedToken.exp * 10000 < new Date().getTime( )) logout();
-        }
-
-    }, [])
   
     return (
     <AppBar position='sticky'>

@@ -1,27 +1,52 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
-
+import PrivateRoute from './PrivateRoute';
 import Home from './Pages/Home/Home';
 import Auth from './Pages/Auth/Auth';
 import Profile from './Pages/Profile/Profile';
 import Friends from './Pages/Friends/Friends';
 import FriendRequests from './Pages/Friend Requests/FriendRequests';
-
+import { useSelector } from 'react-redux';
+import { selectToken } from './features/selectors';
+import decode from 'jwt-decode';
 
 const App = () => {
+    const [isLogged, setIsLogged] = useState(false);
+    const token = useSelector(selectToken);
 
 
-    
+    useEffect(() => {
+ 
+        if (token) {
+            const decodedToken = decode(token);
+            if (decodedToken.exp * 10000 < new Date().getTime( )) {
+                localStorage.clear();
+                setIsLogged(false);
+            } else {
+                setIsLogged(true);
+            }
+        }
+
+    }, [setIsLogged, token])
+
     return(
         <BrowserRouter>
         <Box>
             <Routes>
-                <Route path='/' exact element={ <Home /> } /> 
+                <Route exact element={ <PrivateRoute isLogged={isLogged} /> } > 
+                    <Route path='/' exact element={ <Home /> } />
+                </Route>
                 <Route path='/auth' exact element={ <Auth /> } />
-                <Route path='/user/:id' element={ <Profile /> } />
-                <Route path='/friends' element={ <Friends /> } />
-                <Route path='/friendrequest' element={ <FriendRequests /> } />
+                <Route exact element={ <PrivateRoute isLogged={isLogged} /> } > 
+                    <Route path='/user/:id' element={ <Profile /> } />
+                </Route>
+                <Route exact element={ <PrivateRoute isLogged={isLogged} /> } > 
+                    <Route path='/friends' element={ <Friends /> } />    
+                </Route>
+                <Route exact element={ <PrivateRoute isLogged={isLogged} /> } > 
+                    <Route path='/friendrequest' element={ <FriendRequests /> } />   
+                </Route>
             </Routes>   
         </Box>
         </BrowserRouter>
