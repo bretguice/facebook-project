@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar} from '@mui/material';
-import noAvatar from '../../img/noAvatar.png';
+import noAvatar from '../../utils/img/noAvatar.png';
 
 const UserAvatar = ({ user, height, width }) => {
   return (

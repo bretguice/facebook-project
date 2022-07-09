@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { declineFriend, acceptFriend, getUserById } from '../../features/asyncThunk';
 import { Box, Button, Stack, Typography, Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
 import Navbar from '../../components/Navbar/Navbar';
-import noAvatar from '../../img/noAvatar.png'
+import noAvatar from '../../utils/img/noAvatar.png';
 import LeftBar from '../../components/LeftBar/LeftBar';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';

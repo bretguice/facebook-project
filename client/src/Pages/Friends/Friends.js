@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, Stack, Card, CardMedia, CardActionArea, CardContent } from '@mui/material'
 import Navbar from '../../components/Navbar/Navbar';
 import LeftBar from '../../components/LeftBar/LeftBar';
-import noAvatar from '../../img/noAvatar.png'
+import noAvatar from '../../utils/img/noAvatar.png';
 import { getUserById } from '../../features/asyncThunk';
 import Loading from '../../components/Loading/Loading';
 
