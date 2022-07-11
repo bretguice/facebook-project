@@ -12,7 +12,7 @@ const userSlice = createSlice({
             friends: ['62c4904d760ecc101b91957b'],
             friendRequest: [],
         }],
-        loading: true,
+        loading: false,
         fetchingError: null
     },
     reducers: { },

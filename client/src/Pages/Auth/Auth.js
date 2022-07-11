@@ -84,9 +84,7 @@ const Auth = () => {
                 </Box>
             </form>
         </Paper>
-
-                    <Loading loading={loading} />
-                   
+        <Loading loading={loading} />   
     </Container>
   )
 }
