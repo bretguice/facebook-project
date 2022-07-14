@@ -53,8 +53,10 @@ export const signup = async (req, res) => {
 
 export const testDrive = async (req, res) => {
 
+    const {email} = req.body;
+
     try {
-        const testUser = await User.findone({ email: process.env.TEST_EMAIL });
+        const testUser = await User.findOne({ email });
         const token = jwt.sign({ email: testUser.email, id: testUser._id}, process.env.SECRET, { expiresIn: '10h' });
         res.status(200).json({ result: testUser, token });
     } catch (error) {

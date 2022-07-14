@@ -74,9 +74,9 @@ const Auth = () => {
                     { isSignup ? 'Sign Up' : 'Sign In'}
                 </Button>
                 <br></br>
-                {/* <Button variant='contained' fullWidth color='secondary' onClick={handleTestDrive}>
+                <Button variant='contained' fullWidth color='secondary' onClick={() => handleTestDrive()}>
                     Test Drive
-                </Button> */}
+                </Button>
                 <Box container justifyContent='center'>                  
                     <Button variant='solid' color='green' onClick={switchMode}>
                         { isSignup ? 'Already have an account? Sign In' : "Create New Account" }
