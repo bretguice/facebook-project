@@ -30,7 +30,7 @@ const Navbar = () => {
               <Typography variant='h6' sx={{ display:{ xs:'none', sm:'block'}}}>odinbook</Typography>
             </StyledBox>
           </Link>
-            <Search><InputBase placeholder='search...' /></Search>
+            {/* <Search><InputBase placeholder='search...' /></Search> */}
             <Icons>
                 <Badge badgeContent={4} color='error'>
                     <Mail /> 

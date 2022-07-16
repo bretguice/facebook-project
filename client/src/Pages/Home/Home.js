@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <Box >
         <Navbar currentUser={currentUser} />
-        <Stack  direction='row'spacing={2}  justifyContent='space-between' >
-            <LeftBar flex={0} currentUser={currentUser} />
-            <Box m='auto' width="75%" justifyContent='center'>
-              <Posts width="50%" currentUser={currentUser} />
+        <Stack direction='row' spacing={2}  justifyContent='space-between' >
+            <LeftBar flex={1} currentUser={currentUser} />
+            <Box flex={2}  m='auto' width="50%" justifyContent='flex-start'>
+              <Posts width="200px"  currentUser={currentUser} />
             </Box>
         </Stack>
     </Box>

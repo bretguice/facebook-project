@@ -67,7 +67,7 @@ const Post = ({ post }) => {
   }
 
   return (
-    <div>
+    <>
     {(loading) ? 
     <div>
       <CircularProgress />
@@ -114,7 +114,10 @@ const Post = ({ post }) => {
       <Typography variant="body2" color="text.secondary">{post.message}</Typography>
     </CardContent>
   {(post.selectedImg.length > 0) ?     
-     <ImageList sx={{ width: 400, height: 400 }} cols={1} rows={post.selectedImg.length} rowHeight={500}>
+     <ImageList  
+     sx={{ width: '100%', height: '100%' }}
+     
+     cols={1} rows={post.selectedImg.length} rowHeight={500}>
   {post.selectedImg.map((img) => (
     <ImageListItem key={img}>
       <CardMedia
@@ -144,7 +147,7 @@ const Post = ({ post }) => {
     </Card>
     </>
 }
-  </div>
+  </>
   )
 }
 
