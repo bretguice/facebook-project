@@ -55,23 +55,23 @@ const Profile = () => {
             <ProfileBar  handleEdit={handleModal} currentUser={currentUser} id={id} authUser={authUser} user={user}  />
         </Stack>
     </Box>
-        <Stack direction='column' flex={1} width={'50%'} justifyContent='center' >
-    <Box width='80%' m='auto' >
-        <Modal open={openModal} onClose={handleModal}>
-            <Paper>
-                <form onSubmit={handleSubmit} >
-                    <Typography variant='h6'>Edit Profile Information</Typography>
-                    <TextField variant='outlined' name='firstName' onChange={(e) => handleChange(e)} value={userData.firstName} ></TextField>
-                    <TextField name='lastName' onChange={(e) => handleChange(e)} value={userData.lastName} ></TextField>
-                    <div className='fileInput'>
-                        <FileBase type='file' multiple={false} onDone={({base64}) => setUserData(userData =>({ ...userData, profilePicture: base64}))}/>
-                    </div>
-                    <Button type='submit' variant='contained'>Submit</Button>
-                </form>
-            </Paper>
-        </Modal>
-        <Posts  />
-    </Box>
+    <Modal open={openModal} onClose={handleModal}>
+        <Paper>
+            <form onSubmit={handleSubmit} >
+                <Typography variant='h6'>Edit Profile Information</Typography>
+                <TextField variant='outlined' name='firstName' onChange={(e) => handleChange(e)} value={userData.firstName} ></TextField>
+                <TextField name='lastName' onChange={(e) => handleChange(e)} value={userData.lastName} ></TextField>
+                <div className='fileInput'>
+                    <FileBase type='file' multiple={false} onDone={({base64}) => setUserData(userData =>({ ...userData, profilePicture: base64}))}/>
+                </div>
+                <Button type='submit' variant='contained'>Submit</Button>
+            </form>
+        </Paper>
+    </Modal>
+    <Stack width={'100%'} >
+        <Box display={'flex'} width={'50%'} m='auto' alignItems={'center'} justifyContent={'center'} >
+            <Posts  />
+        </Box>
     </Stack>
 </Box>
   )
