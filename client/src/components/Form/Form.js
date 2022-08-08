@@ -11,24 +11,24 @@ const Form = () => {
     const [postData, setPostData] = useState({ message: '', creator:currentUser._id, selectedImg: [], createdAt: new Date() });
     const dispatch = useDispatch();
 
-    const fileBase64 = (img) => {
-        return new Promise((resolve, reject) => {
-          let fileReader = new FileReader();
-          fileReader.readAsDataURL(img);
-          fileReader.onload = () => resolve(fileReader.result);
-          fileReader.onerror = error => reject(error);
-        })
-      }
-      const handleImage = async (e) => {
-        const image = e.target.files;
-        console.log(image)
-            Promise.all(Array.from(image).map( (img) => fileBase64(img)))
-        .then((b64) => {
-            console.log(b64);
-            setPostData({...postData, selectedImg:[...postData.selectedImg, ...b64]});
-        })
-        .catch(err => console.log(err))
-      }
+        const fileBase64 = (img) => {
+            return new Promise((resolve, reject) => {
+            let fileReader = new FileReader();
+            fileReader.readAsDataURL(img);
+            fileReader.onload = () => resolve(fileReader.result);
+            fileReader.onerror = error => reject(error);
+            })
+        }
+        const handleImage = async (e) => {
+            const image = e.target.files;
+            console.log(image)
+                Promise.all(Array.from(image).map( (img) => fileBase64(img)))
+            .then((b64) => {
+                console.log(b64);
+                setPostData({...postData, selectedImg:[...postData.selectedImg, ...b64]});
+            })
+            .catch(err => console.log(err))
+        }
 
     const handleSubmit = (e) =>{
         e.preventDefault();

@@ -8,7 +8,6 @@ const LeftBar = ({currentUser}) => {
   return (
     <Stack>
       <Box 
-      bgcolor={'lightgray'}
       p={1}
       width={'15vw'}
       sx={{ display: { xs: 'none', sm: 'flex'}}}
